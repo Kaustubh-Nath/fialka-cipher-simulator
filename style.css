@@ -191,3 +191,109 @@ textarea:focus {
     border-radius: 6px;
     padding: 16px;
 }
+
+/* --- ROTORS GRID & CARD STYLES --- */
+.rotors-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 10px;
+}
+
+.rotor-card {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 10px 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.rotor-slot-label {
+    font-size: 0.7rem;
+    color: #8b949e;
+    font-weight: bold;
+}
+
+.rotor-select {
+    width: 100%;
+    background: #161b22;
+    color: #ffffff;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    padding: 2px;
+    text-align: center;
+}
+
+.step-btn {
+    background: none;
+    border: none;
+    color: #8b949e;
+    cursor: pointer;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    transition: 0.2s;
+}
+
+.step-btn:hover {
+    color: #238636;
+}
+
+.rotor-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #161b22;
+    width: 100%;
+    padding: 6px 0;
+    border-radius: 4px;
+    border: 1px solid #21262d;
+}
+
+.pos-num {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #00ff66;
+    font-family: monospace;
+}
+
+.pos-char {
+    font-size: 0.8rem;
+    color: #8b949e;
+}
+
+/* --- TRACE STYLES --- */
+.trace-item {
+    border-bottom: 1px solid #21262d;
+    padding: 10px 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+}
+
+.trace-item:last-child {
+    border-bottom: none;
+}
+
+.trace-header {
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.trace-fwd {
+    color: #00ff66;
+}
+
+.trace-refl {
+    color: #e3b341;
+}
+
+.trace-rev {
+    color: #f78166;
+}
+
+.no-trace {
+    color: #6e7681;
+    font-size: 0.85rem;
+}
