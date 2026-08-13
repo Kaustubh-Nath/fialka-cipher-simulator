@@ -1,169 +1,165 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-
-    background:#111827;
-
-    color:#F9FAFB;
-
-    font-family:Segoe UI,Arial,sans-serif;
-
-    min-height:100vh;
-
-    display:flex;
-
-    flex-direction:column;
+body {
+    background-color: #0d1117;
+    color: #c9d1d9;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: 24px;
 }
 
-header{
-
-    background:#1F2937;
-
-    padding:20px;
-
-    text-align:center;
-
-    border-bottom:2px solid #22C55E;
+/* HEADER STYLES */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
 }
 
-header h1{
-
-    color:#22C55E;
-
-    letter-spacing:3px;
+.header-title h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 1px;
 }
 
-.dashboard{
-
-    flex:1;
-
-    display:grid;
-
-    grid-template-columns:320px 1fr 420px;
-
-    gap:20px;
-
-    padding:20px;
+.header-title p {
+    font-size: 0.85rem;
+    color: #6e7681;
+    font-family: monospace;
+    margin-top: 4px;
 }
 
-.panel{
-
-    background:#1F2937;
-
-    border-radius:12px;
-
-    padding:20px;
-
-    border:1px solid #374151;
-
-    overflow:auto;
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-.panel h2{
-
-    color:#22C55E;
-
-    margin-bottom:20px;
+.header-actions label {
+    font-size: 0.85rem;
+    color: #8b949e;
 }
 
-footer{
-
-    background:#1F2937;
-
-    padding:15px;
-
-    text-align:center;
-
-    border-top:2px solid #22C55E;
+.header-actions select {
+    background: #161b22;
+    color: #f0f6fc;
+    border: 1px solid #30363d;
+    padding: 8px 12px;
+    border-radius: 6px;
+    outline: none;
 }
 
-.textbox-actions{
-
-    display:flex;
-
-    gap:10px;
-
-    margin-top:8px;
+#reset-btn {
+    background: #161b22;
+    color: #f0f6fc;
+    border: 1px solid #30363d;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
 }
 
-.textbox-actions button{
-
-    flex:1;
-
-    padding:8px;
-
-    cursor:pointer;
-
-    border:none;
-
-    border-radius:6px;
-
-    background:#273549;
-
-    color:white;
-
-    transition:0.2s;
+#reset-btn:hover {
+    background: #21262d;
+    border-color: #8b949e;
 }
 
-.textbox-actions button:hover{
-
-    background:#22C55E;
-
-    color:black;
-}
-
-/* --- Text Area & Control Styles --- */
-.field-group {
+/* CARD / CONTAINER STYLES */
+.container {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 20px;
+}
+
+.card {
+    background: #161b22;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 16px;
 }
 
-.field-group label {
-    font-size: 0.95rem;
+.card-title {
+    color: #238636;
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.card-meta {
+    font-size: 0.75rem;
+    color: #8b949e;
+    font-family: monospace;
+}
+
+.legend {
+    color: #238636;
     font-weight: 600;
-    color: #9CA3AF;
+}
+
+/* SECTION 2: BATCH PROCESSING GRID */
+.processing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.input-col, .output-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-size: 0.85rem;
+    color: #8b949e;
 }
 
 textarea {
     width: 100%;
-    height: 120px;
-    background: #111827;
-    border: 1px solid #374151;
-    border-radius: 8px;
+    height: 140px;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
     padding: 12px;
-    color: #22C55E;
+    color: #00ff66;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 1rem;
+    font-size: 0.95rem;
     resize: vertical;
 }
 
 textarea:focus {
     outline: none;
-    border-color: #22C55E;
+    border-color: #238636;
 }
 
 #process-btn {
     width: 100%;
     padding: 12px;
-    background: #22C55E;
-    color: #111827;
+    background: #00e676;
+    color: #000000;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 0.95rem;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
-    margin-bottom: 16px;
+    margin-top: 6px;
     transition: 0.2s;
 }
 
 #process-btn:hover {
-    background: #16A34A;
+    background: #00c853;
 }
 
 .textbox-actions {
@@ -173,16 +169,25 @@ textarea:focus {
 
 .textbox-actions button {
     flex: 1;
-    padding: 8px;
+    padding: 6px;
+    background: #21262d;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+    border-radius: 4px;
     cursor: pointer;
-    border: none;
-    border-radius: 6px;
-    background: #273549;
-    color: white;
+    font-size: 0.8rem;
     transition: 0.2s;
 }
 
 .textbox-actions button:hover {
-    background: #22C55E;
-    color: black;
+    background: #30363d;
+    color: #ffffff;
+}
+
+.trace-box {
+    min-height: 200px;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 16px;
 }

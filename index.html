@@ -4,58 +4,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fialka M-125 Simulator</title>
-    <link rel="stylesheet" href="style.css">
+    <title>FIALKA M-125 (EXTENDED)</title>
+    <link rel="stylesheet" href="style.css?v=2.0">
 </head>
 
 <body>
 
-    <header>
-        <h1>FIALKA M-125 SIMULATOR</h1>
+    <!-- TOP HEADER -->
+    <header class="app-header">
+        <div class="header-title">
+            <h1>FIALKA M-125 (EXTENDED)</h1>
+            <p>10-Rotor Cipher Simulator (50 Contacts: A-Z, 0-9, Symbols)</p>
+        </div>
+        <div class="header-actions">
+            <label for="preset-select">Key Preset:</label>
+            <select id="preset-select">
+                <option value="default">Standard Key Setup</option>
+                <option value="alternate">Alternate Key Setup</option>
+            </select>
+            <button id="reset-btn">↺ Reset Machine</button>
+        </div>
     </header>
 
-    <main class="dashboard">
+    <main class="container">
 
-        <!-- LEFT PANEL -->
-        <section class="panel" id="machine-panel">
-            <h2>Machine Configuration</h2>
-        </section>
-
-        <!-- CENTER PANEL -->
-        <section class="panel" id="cipher-panel">
-            <h2>Encryption Console</h2>
-
-            <div class="field-group">
-                <label for="input-text">Input Text:</label>
-                <textarea id="input-text" placeholder="Enter message here..."></textarea>
-                <div class="textbox-actions">
-                    <button id="copy-input">📋 Copy</button>
-                    <button id="clear-input">🗑 Clear</button>
-                </div>
+        <!-- SECTION 1: ROTOR BANK -->
+        <section class="card">
+            <div class="card-header">
+                <span class="card-title">10-ROTOR ASSEMBLY BANK</span>
+                <span class="card-meta">10 ROTORS × 50 CONTACTS (00 - 49)</span>
             </div>
-
-            <button id="process-btn">Process Message</button>
-
-            <div class="field-group">
-                <label for="output-text">Output Result:</label>
-                <textarea id="output-text" readonly placeholder="Resulting output will appear here..."></textarea>
-                <div class="textbox-actions">
-                    <button id="copy-output">📋 Copy</button>
-                    <button id="clear-output">🗑 Clear</button>
-                </div>
+            <div class="rotors-grid" id="rotors-container">
+                <!-- 10 Rotors dynamically loaded or hardcoded -->
             </div>
         </section>
 
-        <!-- RIGHT PANEL -->
-        <section class="panel" id="trace-panel">
-            <h2>Signal Trace</h2>
+        <!-- SECTION 2: BATCH MESSAGE PROCESSING -->
+        <section class="card">
+            <div class="card-header">
+                <span class="card-title">BATCH MESSAGE PROCESSING</span>
+            </div>
+            
+            <div class="processing-grid">
+                <!-- Input Box Column -->
+                <div class="input-col">
+                    <label for="input-text">Input Text:</label>
+                    <textarea id="input-text" placeholder="Type or paste text here... (Supports A-Z, 0-9, ?, !, @, #, $, +, =, *, /, etc.)"></textarea>
+                    
+                    <div class="textbox-actions">
+                        <button id="copy-input">📋 Copy</button>
+                        <button id="clear-input">🗑 Clear</button>
+                    </div>
+
+                    <button id="process-btn">Process Message</button>
+                </div>
+
+                <!-- Output Box Column -->
+                <div class="output-col">
+                    <label for="output-text">Output Result:</label>
+                    <textarea id="output-text" readonly placeholder="Resulting output will appear here..."></textarea>
+                    
+                    <div class="textbox-actions">
+                        <button id="copy-output">📋 Copy</button>
+                        <button id="clear-output">🗑 Clear</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: LIVE ELECTRICAL CIRCUIT TRACER -->
+        <section class="card">
+            <div class="card-header">
+                <span class="card-title">LIVE ELECTRICAL CIRCUIT TRACER</span>
+                <span class="card-meta legend">FORWARD (GREEN) → REFLECTOR → RETURN (AMBER)</span>
+            </div>
+            <div id="trace-container" class="trace-box">
+                <!-- Trace visualization goes here -->
+            </div>
         </section>
 
     </main>
-
-    <footer>
-        <span>Status: READY</span>
-    </footer>
 
     <script src="script.js"></script>
 
