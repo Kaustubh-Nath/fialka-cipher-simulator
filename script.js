@@ -212,7 +212,7 @@ class MachineController {
 
         traceBox.innerHTML = "";
 
-        const validTraces = traces.filter(t => t !== null);
+        const validTraces = traces.filter(t => t !== null && t !== undefined);
         if (validTraces.length === 0) {
             traceBox.innerHTML = "<p class='no-trace'>No signal traces generated.</p>";
             return;
@@ -220,19 +220,23 @@ class MachineController {
 
         validTraces.forEach((trace, idx) => {
             const traceItem = document.createElement("div");
-            traceItem.className = "trace-item";
+            traceItem.className = "trace-block";
 
-            const fwdPassStr = trace.forwardRotorPass ? trace.forwardRotorPass.map(s => `Slot${s.slot + 1}:${s.contactIn}→${s.wireOut}`).join(" | ") : "";
-            const revPassStr = trace.reverseRotorPass ? trace.reverseRotorPass.map(s => `Slot${s.slot + 1}:${s.contactIn}→${s.wireOut}`).join(" | ") : "";
+            // Format forward rotor pass
+            const fwdPassStr = trace.forwardRotorPass ? 
+                trace.forwardRotorPass.map(s => `Slot${s.slot + 1}:${s.contactIn}→${s.wireOut}`).join(" | ") : "";
+
+            // Format reverse rotor pass
+            const revPassStr = trace.reverseRotorPass ? 
+                trace.reverseRotorPass.map(s => `Slot${s.slot + 1}:${s.contactIn}→${s.wireOut}`).join(" | ") : "";
 
             traceItem.innerHTML = `
-                <div class="trace-header">Char #${idx + 1}: <strong>'${trace.inputChar}'</strong> ➔ <strong>'${trace.outputChar}'</strong></div>
-                <div class="trace-details">
-                    <span class="trace-fwd">[FWD]: ${fwdPassStr}</span><br/>
-                    <span class="trace-refl">[REFL]: Bounce Contact ${trace.reflectorEntryIndex} ➔ ${trace.reflectorExitIndex}</span><br/>
-                    <span class="trace-rev">[REV]: ${revPassStr}</span>
-                </div>
+                <div class="trace-char-header">Char #${idx + 1}: <strong>'${trace.inputChar}' ➔ '${trace.outputChar}'</strong></div>
+                <div class="trace-line trace-fwd"><span class="pass-tag">[FWD]:</span> ${fwdPassStr}</div>
+                <div class="trace-line trace-refl"><span class="pass-tag">[REFL]:</span> Bounce Contact ${trace.reflectorEntryIndex} ➔ ${trace.reflectorExitIndex}</div>
+                <div class="trace-line trace-rev"><span class="pass-tag">[REV]:</span> ${revPassStr}</div>
             `;
+            
             traceBox.appendChild(traceItem);
         });
     }

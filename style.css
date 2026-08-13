@@ -320,3 +320,61 @@ textarea:focus {
     color: #6e7681;
     font-size: 0.85rem;
 }
+
+/* --- MONOSPACE TERMINAL TRACE STYLES --- */
+.trace-box {
+    min-height: 250px;
+    max-height: 500px;
+    overflow-y: auto;
+    background: #090d13;
+    border: 1px solid #21262d;
+    border-radius: 6px;
+    padding: 16px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.trace-block {
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed #21262d;
+    line-height: 1.6;
+}
+
+.trace-block:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.trace-char-header {
+    color: #58a6ff;
+    font-size: 0.95rem;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.trace-line {
+    font-size: 0.82rem;
+    word-break: break-all;
+    white-space: pre-wrap;
+}
+
+.pass-tag {
+    font-weight: bold;
+}
+
+.trace-fwd {
+    color: #3fb950; /* Green for Forward Pass */
+}
+
+.trace-refl {
+    color: #d29922; /* Yellow/Gold for Reflector Bounce */
+}
+
+.trace-rev {
+    color: #f85149; /* Red/Amber for Reverse Return Pass */
+}
+
+.no-trace {
+    color: #6e7681;
+    font-size: 0.85rem;
+}
