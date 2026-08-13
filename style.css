@@ -363,7 +363,7 @@ textarea:focus {
 }
 
 .trace-fwd {
-    color: #3fb950; /* Green for Forward Pass */
+    color: #22C55E; /* Green for Forward Pass */
 }
 
 .trace-refl {
@@ -428,7 +428,7 @@ textarea:focus {
     font-size: 0.75rem;
 }
 
-.trace-fwd { color: #3fb950; }
+.trace-fwd { color: #22C55E; }
 .trace-fwd .pass-tag { background: rgba(63, 185, 80, 0.15); border: 1px solid rgba(63, 185, 80, 0.4); }
 
 .trace-refl { color: #d29922; }
