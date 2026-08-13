@@ -252,11 +252,34 @@ textarea:focus {
     border: 1px solid #21262d;
 }
 
-.pos-num {
+/* Styling for editable Numpad Rotor Position Input */
+.pos-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
     font-size: 1.1rem;
     font-weight: 800;
     color: #00ff66;
     font-family: monospace;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pos-input:focus {
+    background: #0d1117;
+    border-radius: 4px;
+    box-shadow: 0 0 0 1px #238636;
+}
+
+/* Hide default browser number arrows inside input box */
+.pos-input::-webkit-outer-spin-button,
+.pos-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.pos-input[type=number] {
+    -moz-ppearance: textfield;
 }
 
 .pos-char {

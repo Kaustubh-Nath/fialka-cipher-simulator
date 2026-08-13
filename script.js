@@ -96,7 +96,13 @@ class MachineController {
                 </select>
                 <button class="step-btn" data-slot="${slot}" data-dir="up">▲</button>
                 <div class="rotor-display">
-                    <span class="pos-num">${String(currentPosNum).padStart(2, '0')}</span>
+                    <input type="number" 
+                           class="pos-input" 
+                           data-slot="${slot}" 
+                           min="0" 
+                           max="49" 
+                           value="${String(currentPosNum).padStart(2, '0')}" 
+                           title="Type position (0-49) or use Arrow Up/Down" />
                     <span class="pos-char">${currentPosChar}</span>
                 </div>
                 <button class="step-btn" data-slot="${slot}" data-dir="down">▼</button>
@@ -105,7 +111,21 @@ class MachineController {
             container.appendChild(card);
         }
 
-        // Bind rotor selection dropdowns
+        // Helper function to update position via API
+        const setRotorPosition = async (slot, newPos) => {
+            const validPos = (parseInt(newPos, 10) || 0) % 50;
+            const data = await this.api("/api/configure", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ slot, position: validPos < 0 ? validPos + 50 : validPos })
+            });
+            if (data.state) {
+                this.state = data.state;
+                this.renderRotors();
+            }
+        };
+
+        // Bind Rotor Select Dropdowns
         container.querySelectorAll(".rotor-select").forEach(select => {
             select.onchange = async (e) => {
                 const slot = parseInt(e.target.dataset.slot, 10);
@@ -122,26 +142,45 @@ class MachineController {
             };
         });
 
-        // Bind step buttons
+        // Bind Numpad / Keyboard Input Fields
+        container.querySelectorAll(".pos-input").forEach(input => {
+            // Highlight text on click/focus for fast typing
+            input.onfocus = (e) => e.target.select();
+
+            // Handle ENTER key or Arrow Up/Down keys
+            input.onkeydown = (e) => {
+                const slot = parseInt(e.target.dataset.slot, 10);
+                let currentVal = parseInt(e.target.value, 10) || 0;
+
+                if (e.key === "Enter") {
+                    e.target.blur();
+                } else if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    setRotorPosition(slot, currentVal + 1);
+                } else if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    setRotorPosition(slot, currentVal - 1);
+                }
+            };
+
+            // Update on blur (clicking away after typing number)
+            input.onblur = (e) => {
+                const slot = parseInt(e.target.dataset.slot, 10);
+                setRotorPosition(slot, e.target.value);
+            };
+        });
+
+        // Bind Step Buttons (Mouse Click Arrows)
         container.querySelectorAll(".step-btn").forEach(btn => {
-            btn.onclick = async (e) => {
+            btn.onclick = (e) => {
                 const slot = parseInt(e.target.dataset.slot, 10);
                 const dir = e.target.dataset.dir;
                 let currentPos = this.state.positions[slot];
-                let newPos = dir === "up" ? (currentPos + 1) % 50 : (currentPos - 1 + 50) % 50;
-
-                const data = await this.api("/api/configure", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ slot, position: newPos })
-                });
-                if (data.state) {
-                    this.state = data.state;
-                    this.renderRotors();
-                }
+                let newPos = dir === "up" ? currentPos + 1 : currentPos - 1;
+                setRotorPosition(slot, newPos);
             };
         });
-    }
+     }
 
     async processMessage() {
         const inputText = document.getElementById("input-text").value;
