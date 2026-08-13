@@ -72,18 +72,18 @@
             </div>
         </section>
 
-        <!-- SECTION 3: LIVE ELECTRICAL CIRCUIT TRACER -->
-        <section class="card">
-            <div class="card-header">
-                <span class="card-title">LIVE ELECTRICAL CIRCUIT TRACER</span>
-                <span class="card-meta legend">FORWARD (GREEN) → REFLECTOR → RETURN (AMBER)</span>
-            </div>
-            <div 
-                id="trace-container" class="trace-box">
-                <!-- Trace visualization goes here -->
-            </div>
-        </section>
-
+            <!-- LIVE ELECTRICAL CIRCUIT TRACER -->
+    <section class="card">
+        <div class="card-header">
+            <span class="card-title">LIVE ELECTRICAL CIRCUIT TRACER</span>
+            <span class="card-meta legend">FORWARD (GREEN) ➔ REFLECTOR ➔ RETURN (AMBER)</span>
+        </div>
+        <div class="tracer-container">
+            <svg id="tracerSvg" viewBox="0 0 800 240" preserveAspectRatio="xMidYMid meet">
+                <!-- Dynamic SVG graph rendered here -->
+            </svg>
+        </div>
+    </section>
     </main>
 
     <script src="script.js"></script>

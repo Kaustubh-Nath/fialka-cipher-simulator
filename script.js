@@ -200,45 +200,67 @@ class MachineController {
                 this.state = data.state;
                 this.renderRotors();
             }
-            if (data.traces) {
-                this.renderTraces(data.traces);
+            // Pass the last character trace object to draw the SVG paths
+            if (data.traces && data.traces.length > 0) {
+                this.renderTraces(data.traces.at(-1));
             }
         }
     }
 
-    renderTraces(traces) {
-        const traceBox = document.getElementById("trace-container");
-        if (!traceBox) return;
+    renderTraces(trace) {
+        const tracer = document.getElementById("tracerSvg");
+        if (!tracer) return;
 
-        traceBox.innerHTML = "";
-
-        const validTraces = traces.filter(t => t !== null && t !== undefined);
-        if (validTraces.length === 0) {
-            traceBox.innerHTML = "<p class='no-trace'>No signal traces generated.</p>";
+        // Display placeholder text if no trace data is available
+        if (!trace) {
+            tracer.innerHTML = `
+                <text x="400" y="125" text-anchor="middle" fill="#4a596e" font-family="Courier New" font-size="14">
+                    Process a message to render the electrical circuit signal path across 50 contacts
+                </text>`;
             return;
         }
 
-        validTraces.forEach((trace, idx) => {
-            const traceItem = document.createElement("div");
-            traceItem.className = "trace-block";
+        // Map 50 contact positions (0 - 49) to Y coordinates inside SVG box
+        const y = (contact) => 40 + (contact / 49) * 160;
+        const start = 100;
+        const step = 55;
+        const reflector = 700;
 
-            // Format forward rotor pass
-            const fwdPassStr = trace.forwardRotorPass ? 
-                trace.forwardRotorPass.map(s => `Slot${s.slot + 1}:${s.contactIn}→${s.wireOut}`).join(" | ") : "";
+        // 1. Draw background rectangles for 10 Rotors + 1 Reflector box
+        let svg = Array.from({ length: 10 }, (_, slot) => {
+            const x = start + (9 - slot) * step;
+            return `<rect x="${x - 16}" y="30" width="32" height="180" fill="#18202a" stroke="#334357" rx="4"/>`;
+        }).join('') + `<rect x="680" y="30" width="40" height="180" fill="#241b24" stroke="#ff3344" rx="4"/>`;
 
-            // Format reverse rotor pass
-            const revPassStr = trace.reverseRotorPass ? 
-                trace.reverseRotorPass.map(s => `Slot${s.slot + 1}:${s.contactIn}→${s.wireOut}`).join(" | ") : "";
+        const path = (points) => points.map(([x, vertical], i) => `${i ? 'L' : 'M'} ${x} ${vertical}`).join(' ');
 
-            traceItem.innerHTML = `
-                <div class="trace-char-header">Char #${idx + 1}: <strong>'${trace.inputChar}' ➔ '${trace.outputChar}'</strong></div>
-                <div class="trace-line trace-fwd"><span class="pass-tag">[FWD]:</span> ${fwdPassStr}</div>
-                <div class="trace-line trace-refl"><span class="pass-tag">[REFL]:</span> Bounce Contact ${trace.reflectorEntryIndex} ➔ ${trace.reflectorExitIndex}</div>
-                <div class="trace-line trace-rev"><span class="pass-tag">[REV]:</span> ${revPassStr}</div>
-            `;
-            
-            traceBox.appendChild(traceItem);
-        });
+        // 2. Map Green Forward Path (Right-to-Left through Rotors 10 down to 1 into Reflector)
+        const forward = [
+            [30, y(trace.inputIndex)],
+            ...trace.forwardRotorPass.flatMap((item, i) => [
+                [start + i * step - 10, y(item.contactIn)],
+                [start + i * step + 10, y(item.contactOut)]
+            ]),
+            [reflector - 15, y(trace.reflectorEntryIndex)],
+            [reflector + 15, y((trace.reflectorEntryIndex + trace.reflectorExitIndex) / 2)],
+            [reflector - 15, y(trace.reflectorExitIndex)]
+        ];
+
+        // 3. Map Amber Dashed Return Path (Left-to-Right back through Rotors 1 up to 10)
+        const backward = [
+            [reflector - 15, y(trace.reflectorExitIndex)],
+            ...trace.reverseRotorPass.flatMap((item, i) => [
+                [start + (9 - i) * step + 10, y(item.contactIn)],
+                [start + (9 - i) * step - 10, y(item.contactOut)]
+            ]),
+            [30, y(trace.outputIndex)]
+        ];
+
+        // 4. Inject SVG vector elements into the document DOM
+        tracer.innerHTML = svg + `
+            <path d="${path(forward)}" fill="none" stroke="#00e676" stroke-width="2.5"/>
+            <path d="${path(backward)}" fill="none" stroke="#ffb300" stroke-width="2.5" stroke-dasharray="5,4"/>
+        `;
     }
 }
 
