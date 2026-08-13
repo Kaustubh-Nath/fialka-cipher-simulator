@@ -19,9 +19,26 @@ def state():
             "rotors": [{"id": r["id"], "name": r["name"]} for r in HISTORICAL_ROTORS]}
 
 def trace(item):
-    if item.get("is_ignored"): return None
-    def stage(row): return {"slot":row["slot"],"position":row["position"],"contactIn":row["contact_in"],"wireOut":row["wire_out"],"contactOut":row["contact_out"]}
-    return {"inputIndex":item["input_index"],"inputChar":item["input_char"],"forwardRotorPass":[stage(x) for x in item["forward_trace"]],"reflectorEntryIndex":item["reflector_entry"],"reflectorExitIndex":item["reflector_exit"],"reverseRotorPass":[stage(x) for x in item["reverse_trace"]],"outputIndex":item["output_index"],"outputChar":item["output_char"]}
+    if item.get("is_ignored"): 
+        return None
+    def stage(row): 
+        return {
+            "slot":row["slot"],
+            "position":row["position"],
+            "contactIn":row["contact_in"],
+            "wireOut":row["wire_out"],
+            "contactOut":row["contact_out"]
+            }
+    return {
+        "inputIndex":item["input_index"],
+        "inputChar":item["input_char"],
+        "forwardRotorPass":[stage(x) for x in item["forward_trace"]],
+        "reflectorEntryIndex":item["reflector_entry"],
+        "reflectorExitIndex":item["reflector_exit"],
+        "reverseRotorPass":[stage(x) for x in item["reverse_trace"]],
+        "outputIndex":item["output_index"],
+        "outputChar":item["output_char"]
+        }
 
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*args,**kwargs): 
