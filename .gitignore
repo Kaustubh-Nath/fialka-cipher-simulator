@@ -1,0 +1,17 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+tempCodeRunnerFile.py
+
+# Saved user machine configurations
+configs/
+*.json
+
+# Virtual Environments
+venv/
+.venv/
+
+# System files
+.DS_Store
+Thumbs.db
