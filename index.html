@@ -2,101 +2,62 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Fialka M-125 Simulator</title>
-
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
     <header>
-
         <h1>FIALKA M-125 SIMULATOR</h1>
-
     </header>
-
 
     <main class="dashboard">
 
         <!-- LEFT PANEL -->
-
         <section class="panel" id="machine-panel">
-
             <h2>Machine Configuration</h2>
-
         </section>
 
-
         <!-- CENTER PANEL -->
-
         <section class="panel" id="cipher-panel">
             <h2>Encryption Console</h2>
 
-            <!-- Input Text Area -->
             <div class="field-group">
                 <label for="input-text">Input Text:</label>
                 <textarea id="input-text" placeholder="Enter message here..."></textarea>
-            
+                <div class="textbox-actions">
+                    <button id="copy-input">📋 Copy</button>
+                    <button id="clear-input">🗑 Clear</button>
+                </div>
             </div>
 
             <button id="process-btn">Process Message</button>
 
-            <!-- Output Text Area -->
             <div class="field-group">
                 <label for="output-text">Output Result:</label>
                 <textarea id="output-text" readonly placeholder="Resulting output will appear here..."></textarea>
+                <div class="textbox-actions">
+                    <button id="copy-output">📋 Copy</button>
+                    <button id="clear-output">🗑 Clear</button>
                 </div>
+            </div>
         </section>
 
-
         <!-- RIGHT PANEL -->
-
         <section class="panel" id="trace-panel">
-
             <h2>Signal Trace</h2>
-
         </section>
 
     </main>
 
-
     <footer>
-
         <span>Status: READY</span>
-
     </footer>
 
-
     <script src="script.js"></script>
-
-<div class="textbox-actions">
-
-    <button id="copy-input">
-        📋 Copy
-    </button>
-
-    <button id="clear-input">
-        🗑 Clear
-    </button>
-
-</div>
-
-<div class="textbox-actions">
-
-    <button id="copy-output">
-        📋 Copy
-    </button>
-
-    <button id="clear-output">
-        🗑 Clear
-    </button>
-
-</div>
 
 </body>
 

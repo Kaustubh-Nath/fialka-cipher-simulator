@@ -115,3 +115,74 @@ footer{
 
     color:black;
 }
+
+/* --- Text Area & Control Styles --- */
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.field-group label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #9CA3AF;
+}
+
+textarea {
+    width: 100%;
+    height: 120px;
+    background: #111827;
+    border: 1px solid #374151;
+    border-radius: 8px;
+    padding: 12px;
+    color: #22C55E;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #22C55E;
+}
+
+#process-btn {
+    width: 100%;
+    padding: 12px;
+    background: #22C55E;
+    color: #111827;
+    font-weight: bold;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 16px;
+    transition: 0.2s;
+}
+
+#process-btn:hover {
+    background: #16A34A;
+}
+
+.textbox-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.textbox-actions button {
+    flex: 1;
+    padding: 8px;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    background: #273549;
+    color: white;
+    transition: 0.2s;
+}
+
+.textbox-actions button:hover {
+    background: #22C55E;
+    color: black;
+}
