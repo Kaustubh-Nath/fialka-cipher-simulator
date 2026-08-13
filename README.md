@@ -11,7 +11,7 @@ An interactive, web-based cryptographic simulator and live signal tracer for the
 ## 🌐 Live Application
 
 The project is deployed and live on Render:  
-👉 **[Launch Fialka M-125 Simulator]((https://fialka-cipher-simulator.onrender.com/))**
+👉 **[Launch Fialka M-125 Simulator](https://fialka-cipher-simulator.onrender.com/)**
 
 ---
 
